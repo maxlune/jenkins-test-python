@@ -6,13 +6,16 @@ pipeline {
             agent {
                 docker {
                     image 'python'
-                    args '-u root --privileged'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
                     pip3 install flask
+                '''
+            }
+            steps {
+                sh '''
                     python3 index.py
                 '''
             }

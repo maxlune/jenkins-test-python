@@ -1,13 +1,12 @@
 pipeline {
-    agent any
-
-    stages {
-        agent {
+    agent {
             docker {
                 image 'python'
                 reuseNode true
             }
         }
+
+    stages {
         stage('Build') {
             steps {
                 sh '''

@@ -1,23 +1,21 @@
 pipeline {
-    agent {
-            docker {
-                image 'python'
-                reuseNode true
-            }
-        }
+    agent any
 
     stages {
         stage('Build') {
-            steps {
-                sh '''
-                    pip3 install flask
-                '''
+            agent {
+                docker {
+                    image 'python'
+                    reuseNode true
+                }
             }
-        }
-        stage('Test') {
             steps {
                 sh '''
+                    echo 'Jenkins is installing project dependancies'
+                    pip3 install flask
                     python3 index.py
+                    echo 'end'
+                    ls -al
                 '''
             }
         }
